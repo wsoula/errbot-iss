@@ -1,0 +1,9 @@
+[Core]
+Name = Iss
+Module = iss
+
+[Documentation]
+Description = Facts about the International Space Station
+
+[Python]
+Version = 3
