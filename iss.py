@@ -23,7 +23,7 @@ class Iss(BotPlugin):
         # api.open-notify.org/iss/v1/?lat=39.7392&lon=-104.9903&alt=1650&n=1
         lat = '39.7392'
         lon = '-104.9903'
-        url = 'api.open-notify.org/iss/v1/?lat='+lat+'&lon='+lon
+        url = 'http://api.open-notify.org/iss/v1/?lat='+lat+'&lon='+lon
         page = urllib.request.Request(url)
         response = json.loads(urllib.request.urlopen(page).read().decode('utf-8'))
         if 'request' in response:
