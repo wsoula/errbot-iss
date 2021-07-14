@@ -2,6 +2,7 @@
 import urllib.request
 import json
 import datetime
+import pytz
 from errbot import BotPlugin, botcmd, arg_botcmd, re_botcmd
 
 
@@ -26,8 +27,11 @@ class Iss(BotPlugin):
         url = 'http://api.open-notify.org/iss/v1/?lat='+lat+'&lon='+lon
         page = urllib.request.Request(url)
         response = json.loads(urllib.request.urlopen(page).read().decode('utf-8'))
+        risetime = ''
         if 'response' in response:
-            if 'risetime' in response['request']:
-                time = response['response']['risetime']
-                return datetime.datetime.fromtimestamp(time)
+            for item in response['response']:
+                if 'risetime' in item:
+                    time = item['risetime']
+                    risetime = risetime + datetime.datetime.fromtimestamp(time, tz=pytz.timezone('America/Denver')) + ' '
+            return risetime
         return 'No timestamp in response: '+str(response)
