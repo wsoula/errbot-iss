@@ -32,6 +32,7 @@ class Iss(BotPlugin):
             for item in response['response']:
                 if 'risetime' in item:
                     time = item['risetime']
-                    risetime = risetime + datetime.datetime.fromtimestamp(time, tz=pytz.timezone('America/Denver')) + ' '
+                    risetime = risetime + str(datetime.datetime.fromtimestamp(
+                                            time, tz=pytz.timezone('America/Denver'))) + ' '
             return risetime
         return 'No timestamp in response: '+str(response)
