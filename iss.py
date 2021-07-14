@@ -26,8 +26,8 @@ class Iss(BotPlugin):
         url = 'http://api.open-notify.org/iss/v1/?lat='+lat+'&lon='+lon
         page = urllib.request.Request(url)
         response = json.loads(urllib.request.urlopen(page).read().decode('utf-8'))
-        if 'request' in response:
-            if 'datetime' in response['request']:
-                time = response['request']['datetime']
+        if 'response' in response:
+            if 'risetime' in response['request']:
+                time = response['response']['risetime']
                 return datetime.datetime.fromtimestamp(time)
         return 'No timestamp in response: '+str(response)
